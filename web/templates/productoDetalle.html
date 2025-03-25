@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% block content %}
+<div class="col-3 mt-3">
+    {% if producto.imagen %}
+    <img src="{{producto.imagen.url}}" alt="{{producto.titulo}}" width="200" height="200">
+    {% endif %}
+</div>
+<div class="col-4 mt-3">
+    <div class="h1">{{producto.titulo}}</div>
+    <div class="h5 font-wight-bold">
+        <p>
+            Precio:<span class="text-bg-success"> $ {{producto.precio|peso_argentino}}</span>
+        </p>
+    </div>
+    <div class="alert alert-info">
+       <strong>{{producto.descripcion}}</strong> 
+    </div>
+</div>
+    
+      
+    
+  
+
+{% endblock %}

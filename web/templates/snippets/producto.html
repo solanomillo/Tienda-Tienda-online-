@@ -1,0 +1,10 @@
+<div class="card h-100 shadow-sm">  <!-- Tarjeta con sombra y altura fija -->
+    {% if product.imagen %}
+    <img src="{{ product.imagen.url }}" alt="{{ product.titulo }}" class="card-img-top img-fluid" style="height: 300px; object-fit: cover;">  <!-- Imagen responsiva -->
+    {% endif %}
+    <div class="card-body d-flex flex-column">  <!-- Cuerpo de la tarjeta con flexbox -->
+      <h5 class="card-title">{{ product.titulo }}</h5>
+      <p class="card-text flex-grow-1">{{ product.descripcion }}</p>  <!-- Descripción con crecimiento flexible -->
+      <a href="#" class="btn btn-info mt-auto">Más info</a>  <!-- Botón alineado al final -->
+    </div>
+ </div>

@@ -1,0 +1,34 @@
+<!doctype html>
+{% load static %}
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+    
+    <!-- Bootstrap desde static -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+    <div class="container">                  
+      {% include "messages.html" %}
+      <div class="row"> 
+        {% block content %}
+        {% endblock %}
+      </div>        
+    </div>
+    
+    <!-- FontAwesome (puedes descargarlo o dejarlo en línea) -->
+    <script src="https://kit.fontawesome.com/957ccbcca0.js" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap JS desde static -->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Archivo JavaScript personalizado -->
+    <script src="{% static 'js/custom.js' %}"></script>
+
+  </body>
+</html>

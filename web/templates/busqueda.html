@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col mt-3">
+    {% include 'snippets/buscar.html' %}
+    <hr>
+    <p>Resultados de Busqueda para: {{query}}</p>
+    {% include 'snippets/listaProducto.html' %}    
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'web:index' %}">Tienda</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <!-- Elementos de la izquierda -->
+          
+          <ul class="navbar-nav me-auto">  <!-- me-auto empuja lo siguiente a la derecha -->
+            
+                <li class="nav-item dropdown">
+                
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Categorias
+                  </a>
+                  <ul class="dropdown-menu">
+                    {% for categoria in categorias %} 
+                      <li>
+                        <a class="dropdown-item" href="{% url 'web:productosPorCategoria' categoria.slug %}">{{categoria.titulo}}
+                        </a>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                </li>                   
+          </ul>
+          
+          
+          
+          <!-- Elementos de la derecha -->
+          <ul class="navbar-nav">
+              {% if user.is_authenticated %}
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'web:logout' %}">
+                          <span class="fa-solid fa-sign-in-alt"></span>
+                          Salir
+                      </a>
+                  </li>
+              {% else %}
+                  <li class="nav-item">
+                      <a class="nav-link {% if request.path == '/login/' %}active{% endif %}" href="{% url 'web:login' %}">
+                          <span class="fa-solid fa-user"></span>
+                          Login
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link {% if request.path == '/registro/' %}active{% endif %}" href="{% url 'web:registro' %}">
+                          <span class="fa-solid fa-user"></span>
+                          Registro
+                      </a>
+                  </li>
+              {% endif %}
+          </ul>
+      </div>
+  </div>
+</nav>

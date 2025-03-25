@@ -5,22 +5,54 @@ from django.contrib import messages
 from django.contrib.auth import logout
 from .forms import Registro
 from django.contrib.auth.models import User
-
+from .models import Categoria, Producto
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.shortcuts import get_object_or_404
 # Create your views here.
-def index(request):
-    return render(request, 'index.html', {
-        'mensaje':'Tienda',
-        'titulo': 'Inicio',
-        'productos':[
-            {'titulo':'Campera', 'precio':15, 'stock':False},
-            {'titulo':'Pantalon', 'precio':24, 'stock':True},
-            {'titulo':'Remera', 'precio':11, 'stock':False},
-            {'titulo':'Gorra', 'precio':44, 'stock':True},
-        ]
-    })
+
+""" Vistas para el Listado y Detalle del Producto """
+class ProductoListView(ListView):
+    template_name = 'index.html'
+    queryset = Producto.objects.all()
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['mensaje'] = 'Productos'
+        context['categorias'] = Categoria.objects.all()  # Agregar categorías al contexto
+        return context
 
 
-def login(request):
+class ProductosPorCategoriaListView(ListView):
+    template_name = 'index.html'
+    context_object_name = 'producto_list'
+
+    def get_queryset(self):
+        slug = self.kwargs['slug']
+        categoria = get_object_or_404(Categoria, slug=slug)
+        return Producto.objects.filter(categoria=categoria)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categorias'] = Categoria.objects.all()
+        context['categoria_actual'] = get_object_or_404(Categoria, slug=self.kwargs['slug'])  
+        return context
+
+
+
+class ProductoDetalleView(DetailView):
+    model = Producto
+    template_name = 'productoDetalle.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        return context
+    
+    
+def userLogin(request):
+    if request.user.is_authenticated:
+        return redirect('/')
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -30,7 +62,7 @@ def login(request):
         if usuarios is not None:
             lg(request, usuarios)
             messages.success(request, f'Bienvenido {usuarios.username}')
-            return redirect('index')
+            return redirect('/')
         else:
             messages.error(request, 'Datos incorrectos')
     return render(request, 'login.html',{})
@@ -39,10 +71,12 @@ def login(request):
 def salir(request):
     logout(request)
     messages.success(request,'Sesión finalizada')
-    return redirect('login')
+    return redirect('web:login')
 
 
 def registro(request):
+    if request.user.is_authenticated:
+        return redirect('/')
     Dataform = Registro()    
     if request.method == 'POST':
         Dataform = Registro(request.POST or None)
@@ -64,3 +98,21 @@ def registro(request):
     return render(request, 'registro.html',{
         'form': Dataform
     }) 
+    
+""" Vistas para la busqueda de Productos """
+    
+# Versión mejorada (manteniendo GET pero con nombres más descriptivos)
+class BuscarProductoListView(ListView):
+    template_name = 'busqueda.html'
+    
+    def get_queryset(self):
+        # Usamos 'q' (query) en vez de 'i' que es más estándar
+        query = self.request.GET.get('q', '').strip()
+        if query:
+            return Producto.objects.filter(titulo__icontains=query)
+        return Producto.objects.none()  # No devuelve resultados si no hay query
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['query'] = self.request.GET.get('q', '')
+        return context

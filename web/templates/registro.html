@@ -1,59 +1,30 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Registro</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    <style>
-      body {
-        background: url('https://source.unsplash.com/1600x900/?nature') no-repeat center center fixed;
-        background-size: cover;
-      }
-      .card {
-        backdrop-filter: blur(10px);
-        background-color: rgba(255, 255, 255, 0.8);
-        border-radius: 15px;
-        padding: 20px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container vh-100 d-flex align-items-center justify-content-center">
-      <div class="col-12 col-md-6">
-        <div class="card shadow-lg">
-          <div class="card-body">
-            <h2 class="text-center">Registro</h2>
-            <form action="" method="POST">
-              {% csrf_token %} 
-              {% for dato in form %}
-                <div class="form-group mb-3">
-                  {{ dato.label_tag }} 
-                  {{ dato }} 
-                  {% if dato.errors %}
-                    <div class="text-danger">{{ dato.errors }}</div>
-                  {% endif %}
-                </div>
-              {% endfor %}
-              <hr>
-              <div class="mt-4 text-center">
-                <button type="submit" class="btn btn-primary w-100">Registrar</button>
-              </div>
-            </form>
+{% extends 'base.html' %}
+{% block content %}
+</head>
+<body>
+<div class="container vh-50 d-flex mt-5 justify-content-center">
+  <div class="col-12 col-md-6">
+    <div class="card shadow-lg">
+      <div class="card-body">
+        <h2 class="text-center">Registro</h2>
+        <form action="" method="POST">
+          {% csrf_token %} 
+          {% for dato in form %}
+            <div class="form-group mb-3">
+              {{ dato.label_tag }} 
+              {{ dato }} 
+              {% if dato.errors %}
+                <div class="text-danger">{{ dato.errors }}</div>
+              {% endif %}
+            </div>
+          {% endfor %}
+          <hr>
+          <div class="mt-4 text-center">
+            <button type="submit" class="btn btn-primary w-100">Registrar</button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
-  </body>
-</html>
-
+  </div>
+</div>
+{% endblock %}
