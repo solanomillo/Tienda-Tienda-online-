@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+<div class="container my-3 my-md-5">
+    <div class="row">
+        <div class="col-12">
+            <!-- Header responsivo -->
+            <h2 class="h4 h-md-2 mb-3 mb-md-4">
+                <i class="fas fa-shopping-cart me-2"></i>Tu Carrito de Compras
+            </h2>
+            
+            {% if cart.producto.exists %}
+            <!-- Tabla responsive - se convierte en cards en móviles -->
+            <div class="table-responsive d-none d-md-block">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Imagen</th>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in cart.product_related %}
+                        {% with producto=i.producto %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>
+                                {% if producto.imagen %}
+                                <img src="{{ producto.imagen.url }}" alt="{{ producto.titulo }}" 
+                                     class="img-thumbnail" style="width: 70px; height: 70px; object-fit: cover;">
+                                {% else %}
+                                <img src="{% static 'images/no-image.png' %}" alt="Sin imagen" 
+                                     class="img-thumbnail" style="width: 70px; height: 70px; object-fit: cover;">
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{% url 'web:productoDetalle' producto.slug %}" class="text-decoration-none">
+                                    {{ producto.titulo }}
+                                </a>
+                            </td>
+                            <td>
+                                <div class="input-group" style="max-width: 120px;">
+                                    <input type="number" class="form-control text-center" 
+                                           value="{{i.cantidad}}" min="1" readonly>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="h5 text-success">$ {{ producto.precio|peso_argentino }}</span>
+                            </td>
+                            <td>
+                                <a href="{% url 'cart:eliminar' producto.slug %}" 
+                                   class="btn btn-outline-danger btn-sm">
+                                    <i class="fas fa-trash-alt"></i> <span class="d-none d-md-inline">Eliminar</span>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endwith %}
+                        {% endfor %}
+                    </tbody>
+                    <tfoot class="table-group-divider">
+                        <tr>
+                            <td colspan="4" class="text-end"><strong>Total:</strong></td>
+                            <td colspan="2" class="h5 text-success">
+                                $ {{ cart.subtotal|peso_argentino }}
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <!-- Versión móvil (cards) -->
+            <div class="d-md-none">
+                {% for i in cart.product_related %}
+                {% with producto=i.producto %}
+                <div class="card mb-3 shadow-sm">
+                    <div class="row g-0">
+                        <div class="col-4">
+                            {% if producto.imagen %}
+                            <img src="{{ producto.imagen.url }}" class="img-fluid rounded-start h-100" alt="{{ producto.titulo }}" style="object-fit: cover;">
+                            {% else %}
+                            <img src="{% static 'images/no-image.png' %}" class="img-fluid rounded-start h-100" alt="Sin imagen" style="object-fit: cover;">
+                            {% endif %}
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="{% url 'web:productoDetalle' producto.slug %}" class="text-decoration-none">
+                                        {{ producto.titulo }}
+                                    </a>
+                                </h5>
+                                <p class="card-text text-success mb-1">$ {{ producto.precio|peso_argentino }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="input-group" style="width: 100px;">
+                                        <input type="number" class="form-control text-center" 
+                                               value="{{i.cantidad}}" min="1" readonly>
+                                    </div>
+                                    <a href="{% url 'cart:eliminar' producto.slug %}" 
+                                       class="btn btn-outline-danger btn-sm">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endwith %}
+                {% endfor %}
+
+                <!-- Total en móviles -->
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <strong>Total:</strong>
+                            <span class="h5 text-success mb-0">$ {{ cart.subtotal|peso_argentino }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones responsivos -->
+            <div class="d-flex flex-column flex-md-row justify-content-between mt-3 mt-md-4 gap-2">
+                <a href="{% url 'web:index' %}" class="btn btn-outline-primary order-md-1">
+                    <i class="fas fa-arrow-left me-2"></i> Seguir Comprando
+                </a>
+                <div class="d-flex flex-column flex-md-row gap-2 order-md-3">
+                    <a href="{% url 'cart:vaciar' %}" class="btn btn-outline-danger">
+                        <i class="fas fa-trash-alt me-2"></i> Vaciar Carrito
+                    </a>
+                    <a href="" class="btn btn-success">
+                        <i class="fas fa-credit-card me-2"></i> Comprar Ahora
+                    </a>
+                </div>
+            </div>
+            {% else %}
+            <!-- Carrito vacío responsive -->
+            <div class="text-center py-3 py-md-5 empty-cart">
+                <div class="mb-3 mb-md-4">
+                    <i class="fas fa-shopping-cart fa-3x fa-md-5x text-muted"></i>
+                </div>
+                <h3 class="h5 h-md-3 mb-2 mb-md-3">Tu carrito está vacío</h3>
+                <p class="text-muted mb-3 mb-md-4">Parece que aún no has agregado productos a tu carrito</p>
+                <a href="{% url 'web:index' %}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-store me-2"></i> Comprar Ahora
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

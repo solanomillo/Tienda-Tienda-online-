@@ -3,8 +3,14 @@
 {% block content %}
 <div class="container-fluid">  <!-- Contenedor fluido para ocupar todo el ancho disponible -->
   <div class="row">
-    <div class="col-12">
-      <h1 class="text-center my-4">{{ mensaje }}</h1>  <!-- Título centrado con margen -->
+    <div class="col-12" >
+      <div class="col-12 titulo-seccion">
+        <div class="text-center">       
+          <h1 class="titulo-gradiente">
+            {{ mensaje }}
+          </h1>
+          <div class="linea-decorativa"></div>  
+      </div>
     </div>
     {% include 'snippets/buscar.html' %}
   </div>

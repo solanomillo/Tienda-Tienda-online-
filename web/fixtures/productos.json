@@ -1,0 +1,41 @@
+[
+{
+    "model": "web.producto",
+    "pk": 21,
+    "fields": {
+        "categoria": 9,
+        "titulo": "Parlante",
+        "descripcion": "El mejor audio",
+        "precio": "10000.00",
+        "fecha_registro": "2025-03-24",
+        "slug": "parlante",
+        "imagen": "productos/images_2_VxkSeBw.jpg"
+    }
+},
+{
+    "model": "web.producto",
+    "pk": 22,
+    "fields": {
+        "categoria": 10,
+        "titulo": "Zapatillas",
+        "descripcion": "El mejor calzado para este otoño",
+        "precio": "1000.00",
+        "fecha_registro": "2025-03-24",
+        "slug": "zapatillas",
+        "imagen": "productos/images_3_52iibjz.jpg"
+    }
+},
+{
+    "model": "web.producto",
+    "pk": 23,
+    "fields": {
+        "categoria": 11,
+        "titulo": "Remera Overzide",
+        "descripcion": "100% algodon",
+        "precio": "200.00",
+        "fecha_registro": "2025-03-24",
+        "slug": "remera-overzide",
+        "imagen": "productos/images_eKGyM3S.jpg"
+    }
+}
+]

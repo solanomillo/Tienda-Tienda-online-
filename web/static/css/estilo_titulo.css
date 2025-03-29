@@ -1,0 +1,60 @@
+/* static/css/estilo_titulo.css */
+
+/* Estilo para el contenedor principal */
+.titulo-seccion {
+    text-align: center;
+    margin-bottom: 3rem; /* Equivalente a mb-5 */
+    padding: 0 15px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+/* Estilo para el texto con gradiente */
+.titulo-gradiente {
+    font-size: 3.5rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, #3a7bd5, #00d2ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+/* Estilo para el texto normal (fallback) */
+.titulo-normal {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #212529; /* Color oscuro similar a Bootstrap */
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+/* Línea decorativa con gradiente */
+.linea-decorativa {
+    width: 150px;
+    height: 4px;
+    background: linear-gradient(90deg, #3a7bd5, #00d2ff);
+    border-radius: 2px;
+    margin: 0 auto;
+}
+
+/* Línea decorativa normal (fallback) */
+.linea-normal {
+    width: 150px;
+    height: 4px;
+    background: #dee2e6;
+    border-radius: 2px;
+    margin: 0 auto;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+    .titulo-gradiente, .titulo-normal {
+        font-size: 2rem;
+    }
+    
+    .linea-decorativa, .linea-normal {
+        width: 100px;
+    }
+}

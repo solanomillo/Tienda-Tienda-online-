@@ -1,5 +1,6 @@
 from django.db import models
 from autoslug import AutoSlugField
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Categoria(models.Model):
@@ -24,3 +25,13 @@ class Producto(models.Model):
     def __str__(self):
         return self.titulo 
 
+class Cliente(User):
+    class Meta:
+        proxy: True
+        
+    def get_products(self):
+        return []
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    biografia = models.TextField()
