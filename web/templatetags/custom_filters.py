@@ -13,3 +13,15 @@ def peso_argentino(value):
     except (ValueError, TypeError):
         # Si no se puede convertir a número, devuelve el valor original
         return value
+
+
+
+@register.filter
+def unique(queryset):
+    seen = set()
+    unique_items = []
+    for item in queryset:
+        if item.producto.id not in seen:
+            seen.add(item.producto.id)
+            unique_items.append(item)
+    return unique_items

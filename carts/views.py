@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render, get_object_or_404
+from carts.models import CartProduct
 from web.models import Producto
 from .funCart import funcionCarrito
 from django.contrib import messages
@@ -22,9 +23,10 @@ def agregarCarrito(request, producto_id):
     
     
     # Agregar el producto al carrito y la cantidad 
-    cart.producto.add(producto, through_defaults={
-        'cantidad':cantidad
-    })
+    #cart.producto.add(producto, through_defaults={
+        #'cantidad':cantidad
+    #})
+    CartProduct.objects.creaActualizar(cart=cart, producto=producto, cantidad=cantidad)
 
     # Mostrar mensaje de éxito
     messages.success(request, f"✅ {producto.titulo} agregado al carrito.")
@@ -33,50 +35,44 @@ def agregarCarrito(request, producto_id):
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
-def eliminarProductoCarrito(request,slug):
-    from django.shortcuts import get_object_or_404, redirect
-from django.contrib import messages
 
 def eliminarProductoCarrito(request, slug):
-    try:
-        # Obtener el carrito
-        cart = funcionCarrito(request)
-        
-        # Obtener el producto (usando get_object_or_404 para manejo de errores)
-        producto = get_object_or_404(Producto, slug=slug)
-        
-        # Verificar si el producto está en el carrito antes de eliminarlo
-        if cart.producto.filter(slug=slug).exists():
-            cart.producto.remove(producto)
-            messages.success(request, f"✅ {producto.titulo} eliminado del carrito")
-        else:
-            messages.warning(request, f"⚠️ El producto {producto.titulo} no estaba en tu carrito")
-            
-    except Exception as e:
-        messages.error(request, "❌ Ocurrió un error al eliminar el producto")       
-    
-    # Redirigir a la vista del carrito (no a un template directamente)
-    return redirect('cart:carrito')  # Asegúrate de usar el nombre de tu URL
-
-
-from django.shortcuts import redirect
+    from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
+from carts.models import CartProduct
 
-def vaciarCarrito(request):
+def eliminarProductoCarrito(request, slug):
+    cart = funcionCarrito(request)
+    producto = get_object_or_404(Producto, slug=slug)
+    
     try:
-        # Obtener el carrito actual
-        cart = funcionCarrito(request)
+        cart_product = CartProduct.objects.get(cart=cart, producto=producto)
+        cart_product.delete()
+        cart.update_totals()  
         
-        # Verificar si el carrito tiene productos antes de vaciarlo
-        if cart.producto.exists():
-            # Vaciar el carrito
-            cart.producto.clear()          
-            
-    except Exception as e:
-        # Registrar el error para debugging (opcional)        
-        messages.error(request, "❌ Ocurrió un error al vaciar el carrito")
+        messages.success(request, f"🗑️ {producto.titulo} eliminado")
+        
+        # Redirige a la misma página desde donde vino
+        if 'carrito' in request.META.get('HTTP_REFERER', ''):
+            return redirect('cart:carrito')
+        return redirect(request.META.get('HTTP_REFERER', 'web:index'))
+        
+    except CartProduct.DoesNotExist:
+        messages.error(request, "⚠️ Producto no encontrado en el carrito")
+        return redirect('web:index')
+
+def vaciarCarrito(request):  
+    cart = funcionCarrito(request)
+    cart.cartproduct_set.all().delete()  # Elimina todos los productos
+    cart.subtotal = 0
+    cart.total = 0
+    cart.save()
     
-    # Redirigir a la vista del carrito
+    # Para usuarios anónimos
+    if not request.user.is_authenticated:
+        if 'cart_id' in request.session:
+            del request.session['cart_id']
+        cart.delete()
+    
     return redirect('cart:carrito')
-    
 

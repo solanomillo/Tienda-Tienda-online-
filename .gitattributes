@@ -1,0 +1,5 @@
+# .gitattributes
+*.html text=auto
+*.css text=auto
+*.js text=auto
+*.py text=auto
