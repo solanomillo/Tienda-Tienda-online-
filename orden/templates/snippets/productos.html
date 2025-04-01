@@ -1,0 +1,22 @@
+{% load custom_filters %}
+<div class="list-group-item py-3">
+    <div class="row align-items-center">
+        <div class="col-2 col-md-1">
+            {% if product.imagen %}
+            <img src="{{ product.imagen.url }}" alt="{{ product.titulo }}" 
+                 class="img-fluid rounded" style="max-height: 60px; width: auto;">            
+            {% endif %}
+        </div>
+        <div class="col-7 col-md-8">
+            <h6 class="mb-1">
+                <a href="{% url 'web:productoDetalle' product.slug %}" class="text-decoration-none text-dark">
+                    {{ product.titulo }}
+                </a>
+            </h6>
+            <small class="text-muted">SKU: {{ product.id|stringformat:"06d" }}</small>
+        </div>
+        <div class="col-3 text-end">
+            <span class="fw-bold text-primary">${{ product.precio|peso_argentino }}</span>
+        </div>
+    </div>
+</div>

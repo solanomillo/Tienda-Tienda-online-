@@ -1,8 +1,8 @@
 {% load custom_filters %}
 <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCart" role="button" 
+    <a class="nav-link dropdown-toggle position-relative" href="#" id="navbarDropdownCart" role="button" 
        data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fas fa-shopping-cart"></i>        
+        <i class="fas fa-shopping-cart"></i>  
         {% if cart and cart.cartproduct_set.exists %}
         <span class="badge bg-danger">{{ cart.get_total_quantity }}</span>
         {% endif %}

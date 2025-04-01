@@ -7,28 +7,132 @@
     <div class="row">
         <div class="col-12">
             <h2 class="mb-3 mb-md-4"><i class="fas fa-shopping-cart me-2"></i>Tu Carrito de Compras</h2>
-            
-            {% if cart.producto.exists %}
-                <!-- Macro para items del carrito (reutilizable) -->
-                {% for i in cart.product_related|unique %}
-                    {% with producto=i.producto %}
-                        <!-- Versión escritorio (hidden en móviles) -->
-                        <div class="d-none d-md-block">
-                            {% include 'carts/responsive/cart_item_desktop.html' %}
-                        </div>
-                        
-                        <!-- Versión móvil (hidden en desktop) -->
-                        <div class="d-block d-md-none mb-3">
-                            {% include 'carts/responsive/cart_item_mobile.html' %}
-                        </div>
-                    {% endwith %}
-                {% endfor %}
 
-                <!-- Total y acciones (compartido) -->
-                {% include 'carts/responsive/cart_footer.html' %}
+            {% if cart.producto.exists %}
+                <div class="table-responsive d-none d-md-block">
+                    <table class="table table-hover align-middle text-center">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Imagen</th>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in cart.product_related|unique %}
+                                {% with producto=i.producto %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>
+                                        <img src="{% if producto.imagen %}{{ producto.imagen.url }}{% endif %}" 
+                                            alt="{{ producto.titulo }}" class="img-thumbnail" style="width: 70px; height: 70px; object-fit: cover;">
+                                    </td>
+                                    <td>
+                                        <h6 class="mb-1">
+                                            <a href="{% url 'web:productoDetalle' producto.slug %}" class="text-decoration-none">
+                                                {{ producto.titulo }}
+                                            </a>
+                                        </h6>
+                                    </td>
+                                    <td class="text-center">
+                                        <input type="number" readonly class="form-control text-center mx-auto" 
+                                            name="quantity" value="{{i.cantidad}}" min="1" style="width: 60px;">                                        
+                                    <td class="text-center">
+                                        <span class="h5 text-success">$ {{ producto.precio | peso_argentino }}</span>                                        
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'cart:eliminar' producto.slug %}" 
+                                        class="btn btn-outline-danger btn-sm">
+                                            <i class="fas fa-trash-alt"></i> Eliminar
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endwith %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Versión móvil -->
+                <div class="d-block d-md-none">
+                    {% for i in cart.product_related|unique %}
+                        {% with producto=i.producto %}
+                        <div class="list-group-item mb-3 p-3 border rounded">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <img src="{% if producto.imagen %}{{ producto.imagen.url }}{% endif %}" 
+                                        alt="{{ producto.titulo }}" class="img-thumbnail me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                                    <div>
+                                        <h6 class="mb-1">
+                                            <a href="{% url 'web:productoDetalle' producto.slug %}" class="text-decoration-none">
+                                                {{ producto.titulo }}
+                                            </a>
+                                        </h6>
+                                        <small class="text-muted d-block">$ {{ producto.precio|peso_argentino }}</small>
+                                    </div>
+                                </div>
+                                <a href="{% url 'cart:eliminar' producto.slug %}" class="btn btn-outline-danger btn-sm">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </div>
+                            <div class="mt-2 d-flex align-items-center">
+                                <span class="me-2">Cantidad:</span>
+                                <input type="number" readonly class="form-control text-center" 
+                                       name="quantity" value="{{i.cantidad}}" min="1" style="width: 60px;">
+                            </div>                            
+                        </div>
+                        {% endwith %}
+                    {% endfor %}
+                </div>
+
+                <!-- Total general -->
+                <div class="card mt-3 d-md-none">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <strong>Total General:</strong>
+                        <span class="h5 text-success">$ {{ cart.subtotal | peso_argentino }}</span>
+                    </div>
+                </div>
+
+                <table class="table d-none d-md-table mt-3">
+                    <tfoot>
+                        <tr>
+                            <td colspan="1"><strong>Total General:</strong></td>
+                            <td class="text-center h5 text-success ms-5 ps-4">
+                                $ {{ cart.subtotal | peso_argentino }}
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                
+
+                <div class="d-flex flex-column flex-md-row justify-content-between mt-4">
+                    <a href="{% url 'web:index' %}" class="btn btn-outline-primary mb-3 mb-md-0">
+                        <i class="fas fa-arrow-left me-2"></i> Seguir Comprando
+                    </a>
+                    <div class="d-flex flex-column flex-md-row">
+                        <a href="{% url 'cart:vaciar' %}" class="btn btn-outline-danger mb-2 mb-md-0 me-md-3">
+                            <i class="fas fa-trash-alt me-2"></i> Vaciar Carrito
+                        </a>
+                        <a href="{% url 'orden:orden' %}" class="btn btn-success">
+                            <i class="fas fa-credit-card me-2"></i> Comprar Ahora
+                        </a>
+                    </div>
+                </div>
             {% else %}
                 <!-- Carrito vacío -->
-                {% include 'carts/responsive/empty_cart.html' %}
+                <div class="text-center py-5 empty-cart">
+                    <div class="mb-4">
+                        <i class="fas fa-shopping-cart fa-5x text-muted"></i>
+                    </div>
+                    <h3 class="mb-3">Tu carrito está vacío</h3>
+                    <p class="text-muted mb-4">Parece que aún no has agregado productos a tu carrito</p>
+                    <a href="{% url 'web:index' %}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-store me-2"></i> Comprar Ahora
+                    </a>
+                </div>
             {% endif %}
         </div>
     </div>

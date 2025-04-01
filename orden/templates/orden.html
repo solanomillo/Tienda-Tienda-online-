@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row g-4">
+        <!-- Columna de productos -->
+        <div class="col-lg-8">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="h3 mb-0">
+                    <i class="fas fa-clipboard-list me-2 text-primary"></i>Detalles del Pedido
+                </h2>
+                <span class="badge bg-primary">{{ cart.producto.count }} productos</span>
+            </div>
+            
+            <div class="card shadow-sm">
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                        {% for product in cart.producto.all %}
+                            {% include 'snippets/productos.html' %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Columna de resumen -->
+        <div class="col-lg-4">
+            {% include 'snippets/detalles.html' %}
+        </div>
+    </div>
+</div>
+{% endblock %}

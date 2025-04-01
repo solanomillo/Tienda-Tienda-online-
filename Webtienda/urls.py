@@ -23,4 +23,5 @@ urlpatterns = [
     path('', include('web.urls')),
     path('admin/', admin.site.urls),
     path('carrito/',include('carts.urls')),
+    path('orden/', include('orden.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
