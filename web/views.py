@@ -9,6 +9,7 @@ from .models import Categoria, Producto
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
 # Create your views here.
 
 """ Vistas para el Listado y Detalle del Producto """
@@ -62,6 +63,10 @@ def userLogin(request):
         if usuarios is not None:
             lg(request, usuarios)
             messages.success(request, f'Bienvenido {usuarios.username}')
+            
+            if request.GET.get('next'):
+                return HttpResponseRedirect(request.GET.get('next') )
+                
             return redirect('/')
         else:
             messages.error(request, 'Datos incorrectos')
@@ -92,7 +97,7 @@ def registro(request):
             if nuevoUsuario is not None:
                 lg(request, nuevoUsuario)
                 messages.success(request,f'Bienvenido {username}')
-                return redirect('index')        
+                return redirect('web:index')        
             
         
     return render(request, 'registro.html',{

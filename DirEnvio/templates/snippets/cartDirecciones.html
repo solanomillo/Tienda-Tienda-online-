@@ -1,0 +1,60 @@
+<div class="col-md-6 col-lg-4">
+    <div class="card h-100 shadow-sm {% if direccion.default %}border-success{% endif %}">
+        <div class="card-header bg-light d-flex justify-content-between align-items-center">
+            <h5 class="card-title mb-0">
+                {% if direccion.default %}
+                    <span class="badge bg-success me-2">
+                        <i class="bi bi-star-fill"></i> Principal
+                    </span>
+                {% endif %}
+                Datos 
+            </h5>
+            <div class="dropdown">
+                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" 
+                        id="dropdownMenuButton{{ forloop.counter }}" data-bs-toggle="dropdown">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ forloop.counter }}">
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-pencil"></i> Editar</a></li>
+                    {% if not direccion.default %}
+                    <li><a class="dropdown-item text-success" href="#"><i class="bi bi-check-circle"></i> Establecer como principal</a></li>
+                    {% endif %}
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Eliminar</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="mb-2">
+                <span class="text-muted small">Dirección:</span>
+                <p class="mb-1">{{ direccion.linea1 }}</p>               
+            </div>
+            <div class="row small">
+                <div class="col-6">
+                    <span class="text-muted">Ciudad:</span>
+                    <p>{{ direccion.ciudad }}</p>
+                </div>
+                <div class="col-6">
+                    <span class="text-muted">Provincia:</span>
+                    <p>{{ direccion.estado }}</p>
+                </div>
+                <div class="col-6">
+                    <span class="text-muted">País:</span>
+                    <p>{{ direccion.pais }}</p>
+                </div>
+                <div class="col-6">
+                    <span class="text-muted">Código Postal:</span>
+                    <p>{{ direccion.postal_codigo }}</p>
+                </div>
+                Referencia: {{direccion.reference}}
+            </div>
+        </div>
+        <div class="card-footer bg-transparent">
+            {% if not direccion.default %}
+            <a href="#" class="btn btn-outline-success btn-sm">
+                <i class="bi bi-check-circle"></i> Hacer principal
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>

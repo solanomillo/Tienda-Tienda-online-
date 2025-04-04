@@ -30,6 +30,14 @@
           
           <!-- Elementos de la derecha -->
           <ul class="navbar-nav">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'Envio:direccion_envio' %}">
+                <span class="fa-solid fa-location-arrow"></span>
+                Mis Direcciones
+            </a>
+            </li>
+            {% endif %}
             {% include 'carrito.html' %}
               {% if user.is_authenticated %}
                   <li class="nav-item">
@@ -51,7 +59,7 @@
                           Registro
                       </a>
                   </li>
-              {% endif %}
+              {% endif %}                
           </ul>
       </div>
   </div>

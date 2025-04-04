@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'web',
     'carts',
     'orden',
+    'DirEnvio',
 ]
 
 MIDDLEWARE = [

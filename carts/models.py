@@ -25,6 +25,9 @@ class Cart(models.Model):
     def update_totals(self):
         self.update_subtotal()
         self.update_total()
+        
+        if self.orden:
+            self.orden.update_total()
     
     def update_subtotal(self):
         subtotal = self.cartproduct_set.aggregate(
@@ -52,6 +55,10 @@ class Cart(models.Model):
         return self.cartproduct_set.select_related('producto').distinct()  # Evita duplicados
 
 
+    @property
+    def orden(self):
+        return self.orden_set.first()
+    
 class CartProductManager(models.Manager): 
      
     def creaActualizar(self, cart, producto, cantidad=1):
