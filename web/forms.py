@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.models import User
+from web.models import User
 
 class Registro(forms.Form):
     username = forms.CharField(label='Nombre',min_length=5, max_length=40, required=True,

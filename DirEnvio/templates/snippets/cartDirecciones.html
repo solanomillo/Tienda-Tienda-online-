@@ -7,7 +7,7 @@
                         <i class="bi bi-star-fill"></i> Principal
                     </span>
                 {% endif %}
-                Datos 
+                {{ direccion.reference|default:"Mi dirección" }}
             </h5>
             <div class="dropdown">
                 <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" 
@@ -15,19 +15,29 @@
                     <i class="bi bi-three-dots-vertical"></i>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ forloop.counter }}">
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-pencil"></i> Editar</a></li>
+                    <li><a class="dropdown-item" href="{% url 'Envio:actualizar' direccion.pk %}"><i class="bi bi-pencil"></i> Editar</a></li>
                     {% if not direccion.default %}
-                    <li><a class="dropdown-item text-success" href="#"><i class="bi bi-check-circle"></i> Establecer como principal</a></li>
+                    <li>
+                        <form method="post" action="{% url 'Envio:principal' direccion.pk %}" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="dropdown-item text-success">
+                                <i class="bi bi-check-circle"></i> Establecer como principal
+                            </button>
+                        </form>
+                    </li>
                     {% endif %}
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Eliminar</a></li>
+                    <li><a class="dropdown-item text-danger" href="{% url 'Envio:Eliminar' direccion.pk %}"><i class="bi bi-trash"></i> Eliminar</a></li>
                 </ul>
             </div>
         </div>
         <div class="card-body">
             <div class="mb-2">
                 <span class="text-muted small">Dirección:</span>
-                <p class="mb-1">{{ direccion.linea1 }}</p>               
+                <p class="mb-1">{{ direccion.linea1 }}</p>
+                {% if direccion.linea2 %}
+                <p class="mb-1">{{ direccion.linea2 }}</p>
+                {% endif %}
             </div>
             <div class="row small">
                 <div class="col-6">
@@ -46,14 +56,20 @@
                     <span class="text-muted">Código Postal:</span>
                     <p>{{ direccion.postal_codigo }}</p>
                 </div>
-                Referencia: {{direccion.reference}}
+            </div>
+            <div class="mt-2">
+                <span class="text-muted small">Referencia:</span>
+                <p>{{ direccion.reference }}</p>
             </div>
         </div>
         <div class="card-footer bg-transparent">
             {% if not direccion.default %}
-            <a href="#" class="btn btn-outline-success btn-sm">
-                <i class="bi bi-check-circle"></i> Hacer principal
-            </a>
+            <form method="post" action="{% url 'Envio:principal' direccion.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-success btn-sm">
+                    <i class="bi bi-check-circle"></i> Hacer principal
+                </button>
+            </form>
             {% endif %}
         </div>
     </div>

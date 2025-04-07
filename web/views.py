@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate
 from django.contrib import messages
 from django.contrib.auth import logout
 from .forms import Registro
-from django.contrib.auth.models import User
+from web.models import User
 from .models import Categoria, Producto
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView

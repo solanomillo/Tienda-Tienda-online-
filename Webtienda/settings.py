@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django_admin_tailwind',
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,6 +45,31 @@ INSTALLED_APPS = [
     'DirEnvio',
 ]
 
+JAZZMIN_SETTINGS = {
+    "site_title": "Panel de Tienda",
+    "site_header": "Administración de la Tienda",
+    "site_brand": "Mi Tienda",
+    "welcome_sign": "Bienvenido al panel de administración",
+    "copyright": "Mi Tienda © 2025",
+    "search_model": "web.Producto",  # Puedes cambiarlo a tu modelo
+
+    # Logos / Íconos (opcional, si quieres usar imágenes)
+    "site_logo": None,  # o 'static/img/logo.png' si tienes uno
+    "site_icon": None,  # o 'static/img/favicon.ico'
+
+    # Colores
+    "primary_color": "#0d6efd",  # Azul (puedes usar cualquier hex)
+
+    # Menú izquierdo (opcionalmente ordenado)
+    "order_with_respect_to": ["web.Categoria", "web.Producto"],
+
+    # Comportamiento
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "hide_apps": [],  # Puedes ocultar apps si quieres
+}
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -56,6 +81,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Webtienda.urls'
+
+AUTH_USER_MODEL = 'web.User'
+
 
 TEMPLATES = [
     {

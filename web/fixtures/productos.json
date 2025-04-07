@@ -1,41 +1,80 @@
 [
 {
     "model": "web.producto",
-    "pk": 21,
+    "pk": 24,
     "fields": {
-        "categoria": 9,
-        "titulo": "Parlante",
-        "descripcion": "El mejor audio",
+        "categoria": 1,
+        "titulo": "Remera Personalizada",
+        "descripcion": "100% algodón. Lleva tu estilo de la mejor manera",
         "precio": "10000.00",
-        "fecha_registro": "2025-03-24",
-        "slug": "parlante",
-        "imagen": "productos/images_2_VxkSeBw.jpg"
+        "fecha_registro": "2025-03-28",
+        "slug": "remera-personalizada",
+        "imagen": "productos/remera2.jpg"
     }
 },
 {
     "model": "web.producto",
-    "pk": 22,
+    "pk": 25,
     "fields": {
-        "categoria": 10,
-        "titulo": "Zapatillas",
-        "descripcion": "El mejor calzado para este otoño",
-        "precio": "1000.00",
-        "fecha_registro": "2025-03-24",
-        "slug": "zapatillas",
-        "imagen": "productos/images_3_52iibjz.jpg"
+        "categoria": 1,
+        "titulo": "Remera Clásica",
+        "descripcion": "Calidad y Precio en la mejor prende. 100% algodón",
+        "precio": "12000.00",
+        "fecha_registro": "2025-03-28",
+        "slug": "remera-clasica",
+        "imagen": "productos/remera1.jpg"
     }
 },
 {
     "model": "web.producto",
-    "pk": 23,
+    "pk": 26,
     "fields": {
-        "categoria": 11,
-        "titulo": "Remera Overzide",
-        "descripcion": "100% algodon",
-        "precio": "200.00",
-        "fecha_registro": "2025-03-24",
-        "slug": "remera-overzide",
-        "imagen": "productos/images_eKGyM3S.jpg"
+        "categoria": 1,
+        "titulo": "Remera Adidas",
+        "descripcion": "Prenda personalizada 100% algodón",
+        "precio": "10000.00",
+        "fecha_registro": "2025-03-28",
+        "slug": "remera-adidas",
+        "imagen": "productos/remera_3.jpg"
+    }
+},
+{
+    "model": "web.producto",
+    "pk": 27,
+    "fields": {
+        "categoria": 2,
+        "titulo": "Camiseta de River Clásica",
+        "descripcion": "Replica de la camiseta del club más grande de la argentina",
+        "precio": "30000.00",
+        "fecha_registro": "2025-03-28",
+        "slug": "camiseta-de-river-clasica",
+        "imagen": "productos/camiseta1.jpg"
+    }
+},
+{
+    "model": "web.producto",
+    "pk": 28,
+    "fields": {
+        "categoria": 2,
+        "titulo": "Camiseta de Independiente",
+        "descripcion": "Camiseta del rojo clásica",
+        "precio": "30000.00",
+        "fecha_registro": "2025-03-28",
+        "slug": "camiseta-de-independiente",
+        "imagen": "productos/camiseta2.jpg"
+    }
+},
+{
+    "model": "web.producto",
+    "pk": 29,
+    "fields": {
+        "categoria": 2,
+        "titulo": "Camiseta de Argentina",
+        "descripcion": "Luci como un campeón. Prenda 100% algodón",
+        "precio": "30000.00",
+        "fecha_registro": "2025-03-28",
+        "slug": "camiseta-de-argentina",
+        "imagen": "productos/camiseta3.jpg"
     }
 }
 ]

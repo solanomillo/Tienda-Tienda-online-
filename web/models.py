@@ -1,8 +1,22 @@
 from django.db import models
 from autoslug import AutoSlugField
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
-# Create your models here.
+class User(AbstractUser):
+    def get_full_name(self):
+        return f'{self.first_name}, {self.last_name}'
+
+    @property
+    def direccion_envio(self):
+        # Usa select_related para optimizar la consulta si luego usas relaciones
+        return self.direccionenvio_set.filter(default=True).select_related().first()
+
+    def has_direccion_envio(self):
+        return self.direccion_envio is not None
+
+
+
+
 class Categoria(models.Model):
     titulo = models.CharField(max_length=40) 
     slug = AutoSlugField(populate_from='titulo', null=False, blank=False, unique=True)  
@@ -31,6 +45,11 @@ class Cliente(User):
         
     def get_products(self):
         return []
+    
+    
+    
+    
+    
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
