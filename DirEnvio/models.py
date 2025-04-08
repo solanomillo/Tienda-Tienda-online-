@@ -19,10 +19,13 @@ class DireccionEnvio(models.Model):
 
     @property
     def direccion(self):
-        return f'{self.ciudad} - {self.estado} - {self.pais}'
+        return f'{self.ciudad} - {self.estado}'
 
     def set_as_default(self):
         # Desactiva las demás direcciones en una sola query
         DireccionEnvio.objects.filter(user=self.user, default=True).update(default=False)
         self.default = True
         self.save(update_fields=["default"])
+    
+    def has_orden(self):
+        return self.orden_set.exists()

@@ -9,7 +9,7 @@ class User(AbstractUser):
     @property
     def direccion_envio(self):
         # Usa select_related para optimizar la consulta si luego usas relaciones
-        return self.direccionenvio_set.filter(default=True).select_related().first()
+        return self.direcciones.filter(default=True).select_related().first()
 
     def has_direccion_envio(self):
         return self.direccion_envio is not None

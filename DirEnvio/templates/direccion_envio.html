@@ -6,19 +6,19 @@
     {% if object_list %}
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="fw-bold text-primary">Mis direcciones</h2>
-            <a href="{% url 'Envio:nueva' %}" class="btn btn-success">
+            <a href="{% url 'DirEnvio:nueva' %}" class="btn btn-success">
                 <i class="bi bi-plus-circle"></i> Agregar Dirección
             </a>
         </div>
         <div class="row g-4">
-            {% for direccion in object_list %}
+            {% for direccion_envio in object_list %}
             {% include 'snippets/cartDirecciones.html' %}
             {% endfor %}
         </div>
     {% else %}
         <div class="alert alert-info text-center">
             <i class="bi bi-info-circle-fill"></i> No tienes direcciones registradas.
-            <a href="{% url 'Envio:nueva' %}" class="alert-link">Agrega tu primera dirección</a>
+            <a href="{% url 'DirEnvio:nueva' %}" class="alert-link">Agrega tu primera dirección</a>
         </div>
     {% endif %}
 </div>

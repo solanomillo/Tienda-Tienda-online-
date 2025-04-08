@@ -4,6 +4,7 @@ from carts.models import Cart
 from enum import Enum
 import uuid
 from django.db.models.signals import pre_save
+from DirEnvio.models import DireccionEnvio
 
 class OrdenStatus(Enum):
     CREATED = 'CREADO'
@@ -22,6 +23,7 @@ class Orden(models.Model):
     envio_total = models.DecimalField(default=10 , max_digits=9, decimal_places=2)
     total = models.DecimalField(default=0, max_digits=9, decimal_places=2)
     fecha_registro = models.DateTimeField(auto_now_add=True)
+    direccion_envio = models.ForeignKey(DireccionEnvio, null=True, blank=True, on_delete=models.CASCADE)
     
     def __str__(self):
         return self.ordenID
@@ -31,7 +33,20 @@ class Orden(models.Model):
     
     def update_total(self):
         self.total = self.get_total()
+        
+    def get_or_set_direccion_envio(self):
+        if self.direccion_envio:
+            return self.direccion_envio
+
+        direccion_envio = self.user.direccion_envio
+        
+        if direccion_envio:
+            self.update_direccion_envio(direccion_envio)
+        return direccion_envio
     
+    def update_direccion_envio(self, direccion_envio):
+        self.direccion_envio = direccion_envio
+        self.save()
 
 def enviarOrden(sender, instance, *args, **kwargs):
     if not instance.ordenID:
