@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-4">
+    <h3 class="mb-4 text-center">🧾 Mi historial de órdenes</h3>
+
+    {% if ordenes %}
+        {% for orden in ordenes %}
+        {% include 'snippets/listado_ordenes.html' %}
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-info text-center" role="alert">
+            No tienes órdenes completadas aún.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

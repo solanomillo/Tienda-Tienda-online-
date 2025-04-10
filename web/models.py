@@ -1,6 +1,7 @@
 from django.db import models
 from autoslug import AutoSlugField
 from django.contrib.auth.models import AbstractUser
+from orden.opciones import OrdenStatus
 
 class User(AbstractUser):
     def get_full_name(self):
@@ -13,6 +14,13 @@ class User(AbstractUser):
 
     def has_direccion_envio(self):
         return self.direccion_envio is not None
+    
+    
+    def ordenes_completadas(self):
+        return self.orden_set.filter(
+            status=OrdenStatus.COMPLETED
+        ).select_related('user').order_by('-fecha_registro')
+
 
 
 

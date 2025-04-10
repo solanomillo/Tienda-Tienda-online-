@@ -1,0 +1,14 @@
+.alert-gradient {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+.card {
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+.card:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+.bg-light {
+    background-color: #f8f9fc !important;
+}   

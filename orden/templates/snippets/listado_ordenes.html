@@ -1,0 +1,57 @@
+{% load custom_filters %}
+<div class="card shadow-sm mb-4 border-0">
+    <div class="card-header bg-light">
+        <div class="row text-center">
+            <div class="col-md-4 mb-2">
+                <div class="alert alert-success p-2 m-0 d-flex justify-content-center align-items-center" role="alert">
+                    <i class="bi bi-check-circle-fill me-2"></i>
+                    <strong>Orden Completada</strong>
+                </div>
+                <small class="text-muted d-block mt-1">
+                    {{ orden.fecha_registro|date:"d/m/Y H:i" }}
+                </small>
+            </div>
+
+            <div class="col-md-4 mb-2">
+                <span class="badge bg-primary fs-6">Total:</span>
+                <div class="fs-5 mt-1">
+                    $ {{ orden.total|peso_argentino }}
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-2">
+                <span class="badge bg-danger fs-6">Dirección de Envío:</span>
+                <div class="mt-1">
+                    {{ orden.direccion_envio }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+        {% for i in orden.cart.product_related %}
+        {% with product=i.producto %}
+        <div class="row align-items-center mb-3 border-bottom pb-2">
+            <div class="col-3 col-md-2">
+                {% if product.imagen %}
+                <img src="{{ product.imagen.url }}" class="img-thumbnail rounded" alt="{{ product.titulo }}" style="max-width: 80px;">
+                {% else %}
+                <div class="text-muted">Sin imagen</div>
+                {% endif %}
+            </div>
+
+            <div class="col-5 col-md-6">
+                <div class="fw-bold">{{ product.titulo }}</div>
+                <div class="text-danger">$
+                    {{ product.precio|peso_argentino }}</div>
+            </div>
+
+            <div class="col-4 col-md-4 text-end">
+                <small class="text-muted">Cantidad:</small>
+                <div class="fw-semibold">{{ i.cantidad }}</div>
+            </div>
+        </div>
+        {% endwith %}
+        {% endfor %}
+    </div>
+</div>

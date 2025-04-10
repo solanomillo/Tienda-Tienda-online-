@@ -20,3 +20,6 @@ def breadcrumb(products=True, address=False, pyment=False, confirmation=False):
         {'title':'Pago', 'active':pyment, 'url':reverse('orden:orden')},
         {'title':'Confirmación', 'active':confirmation, 'url':reverse('orden:orden')},
     ]
+
+def deleteOrden(request):
+    request.session['orden_id'] = None 

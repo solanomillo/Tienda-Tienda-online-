@@ -7,8 +7,9 @@ from django.db.models.signals import m2m_changed
 from django.db.models import F
 from django.contrib.sessions.backends.db import SessionStore  
 from django.conf import settings  
+from orden.opciones import OrdenStatus
 
-# Create your models here.
+
 class Cart(models.Model):
     cart_id = models.CharField(max_length=100, null=False, blank=False, unique=True)
     usuario = models.ForeignKey(User, null=True, blank=False, on_delete=models.CASCADE)
@@ -57,7 +58,7 @@ class Cart(models.Model):
 
     @property
     def orden(self):
-        return self.orden_set.first()
+        return self.orden_set.filter(status=OrdenStatus.CREATED).first()
     
 class CartProductManager(models.Manager): 
      

@@ -37,3 +37,7 @@ def funcionCarrito(request):
         cart = Cart.objects.create()
         request.session['cart_id'] = str(cart.cart_id)
         return cart
+
+
+def deleteCart(request):
+    request.session['cart_id'] = None

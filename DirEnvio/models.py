@@ -15,7 +15,7 @@ class DireccionEnvio(models.Model):
     fecha_registro = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.linea1}, {self.ciudad}"
+        return f"{self.postal_codigo},{self.ciudad}-{self.estado}"
 
     @property
     def direccion(self):
