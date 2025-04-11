@@ -11,7 +11,7 @@ body {
   position: relative;
 }
 
-/* Overlay para mejor legibilidad */
+/* Overlay para mejor legibilidad
 body::before {
   content: "";
   position: fixed;
@@ -21,7 +21,7 @@ body::before {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: -1;
-}
+} */
 
 /* Contenido principal */
 main {

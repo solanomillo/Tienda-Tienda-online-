@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'carts',
     'orden',
     'DirEnvio',
+    'promo_codigo'
 ]
 
 JAZZMIN_SETTINGS = {
