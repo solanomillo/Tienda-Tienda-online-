@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'carts',
     'orden',
     'DirEnvio',
-    'promo_codigo'
+    'promo_codigo',
+    'MetodoPago',
 ]
 
 JAZZMIN_SETTINGS = {
