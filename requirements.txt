@@ -3,3 +3,4 @@ Pillow
 mysqlclient
 django-jazzmin
 django-autoslug
+python-decouple

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Online - Bootstrap</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+       p
+        .product-card {
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .category-card {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        .category-card:hover {
+            transform: scale(1.03);
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 40px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Mi Tienda</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Categorías</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ofertas</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="#" class="btn btn-outline-light me-2">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-light position-relative">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            3
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Bienvenido a nuestra tienda</h1>
+            <p class="lead">Los mejores productos al mejor precio</p>
+            <a href="#" class="btn btn-primary btn-lg">Ver ofertas</a>
+        </div>
+    </div>
+
+    <!-- Carrusel de productos destacados -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Productos Destacados</h2>
+            <div id="featuredProducts" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="card product-card">
+                                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Producto">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Producto 1</h5>
+                                        <p class="card-text">$19.99</p>
+                                        <a href="#" class="btn btn-primary">Agregar al carrito</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card product-card">
+                                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Producto">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Producto 2</h5>
+                                        <p class="card-text">$24.99</p>
+                                        <a href="#" class="btn btn-primary">Agregar al carrito</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card product-card">
+                                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Producto">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Producto 3</h5>
+                                        <p class="card-text">$29.99</p>
+                                        <a href="#" class="btn btn-primary">Agregar al carrito</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card product-card">
+                                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Producto">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Producto 4</h5>
+                                        <p class="card-text">$34.99</p>
+                                        <a href="#" class="btn btn-primary">Agregar al carrito</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="card product-card">
+                                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Producto">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Producto 5</h5>
+                                        <p class="card-text">$39.99</p>
+                                        <a href="#" class="btn btn-primary">Agregar al carrito</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card product-card">
+                                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Producto">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Producto 6</h5>
+                                        <p class="card-text">$44.99</p>
+                                        <a href="#" class="btn btn-primary">Agregar al carrito</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card product-card">
+                                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Producto">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Producto 7</h5>
+                                        <p class="card-text">$49.99</p>
+                                        <a href="#" class="btn btn-primary">Agregar al carrito</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card product-card">
+                                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Producto">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Producto 8</h5>
+                                        <p class="card-text">$54.99</p>
+                                        <a href="#" class="btn btn-primary">Agregar al carrito</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#featuredProducts" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#featuredProducts" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categorías -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Explora nuestras categorías</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="category-card" style="background-color: #FF6B6B;">
+                        <h3>Electrónica</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="category-card" style="background-color: #4ECDC4;">
+                        <h3>Hogar</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="category-card" style="background-color: #45B7D1;">
+                        <h3>Moda</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="category-card" style="background-color: #FFBE0B;">
+                        <h3>Deportes</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="category-card" style="background-color: #FB5607;">
+                        <h3>Juguetes</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="category-card" style="background-color: #8338EC;">
+                        <h3>Libros</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ofertas especiales -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Ofertas Especiales</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card product-card">
+                        <span class="position-absolute top-0 end-0 bg-danger text-white p-2">-20%</span>
+                        <img src="https://via.placeholder.com/300" class="card-img-top" alt="Oferta">
+                        <div class="card-body">
+                            <h5 class="card-title">Producto en Oferta</h5>
+                            <p class="card-text">
+                                <span class="text-decoration-line-through text-muted">$49.99</span>
+                                <span class="fw-bold text-danger"> $39.99</span>
+                            </p>
+                            <a href="#" class="btn btn-danger">Aprovechar oferta</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card product-card">
+                        <span class="position-absolute top-0 end-0 bg-danger text-white p-2">-15%</span>
+                        <img src="https://via.placeholder.com/300" class="card-img-top" alt="Oferta">
+                        <div class="card-body">
+                            <h5 class="card-title">Otra Oferta</h5>
+                            <p class="card-text">
+                                <span class="text-decoration-line-through text-muted">$59.99</span>
+                                <span class="fw-bold text-danger"> $50.99</span>
+                            </p>
+                            <a href="#" class="btn btn-danger">Aprovechar oferta</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card product-card">
+                        <span class="position-absolute top-0 end-0 bg-danger text-white p-2">-30%</span>
+                        <img src="https://via.placeholder.com/300" class="card-img-top" alt="Oferta">
+                        <div class="card-body">
+                            <h5 class="card-title">Gran Oferta</h5>
+                            <p class="card-text">
+                                <span class="text-decoration-line-through text-muted">$79.99</span>
+                                <span class="fw-bold text-danger"> $55.99</span>
+                            </p>
+                            <a href="#" class="btn btn-danger">Aprovechar oferta</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Lo que dicen nuestros clientes</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <img src="https://via.placeholder.com/100" class="rounded-circle mb-3" alt="Cliente">
+                            <h5 class="card-title">María González</h5>
+                            <div class="text-warning mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="card-text">"Excelente servicio y productos de calidad. Volveré a comprar sin duda."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <img src="https://via.placeholder.com/100" class="rounded-circle mb-3" alt="Cliente">
+                            <h5 class="card-title">Juan Pérez</h5>
+                            <div class="text-warning mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p class="card-text">"Entrega rápida y buen embalaje. Los productos llegaron en perfecto estado."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <img src="https://via.placeholder.com/100" class="rounded-circle mb-3" alt="Cliente">
+                            <h5 class="card-title">Laura Martínez</h5>
+                            <div class="text-warning mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <p class="card-text">"Buena relación calidad-precio. Atención al cliente muy amable."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-5 bg-dark text-white">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <h2>Suscríbete a nuestro newsletter</h2>
+                    <p class="lead">Recibe ofertas exclusivas y novedades directamente en tu correo.</p>
+                    <form class="row g-3 justify-content-center">
+                        <div class="col-md-8">
+                            <input type="email" class="form-control form-control-lg" placeholder="Tu correo electrónico">
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary btn-lg w-100">Suscribirse</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h5>Mi Tienda</h5>
+                    <p>Los mejores productos al mejor precio.</p>
+                    <div class="social-icons">
+                        <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h5>Enlaces rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Inicio</a></li>
+                        <li><a href="#" class="text-white">Productos</a></li>
+                        <li><a href="#" class="text-white">Ofertas</a></li>
+                        <li><a href="#" class="text-white">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Ayuda</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Preguntas frecuentes</a></li>
+                        <li><a href="#" class="text-white">Envíos y devoluciones</a></li>
+                        <li><a href="#" class="text-white">Política de privacidad</a></li>
+                        <li><a href="#" class="text-white">Términos y condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Contacto</h5>
+                    <address>
+                        <p><i class="fas fa-map-marker-alt me-2"></i> Calle Falsa 123, Ciudad</p>
+                        <p><i class="fas fa-phone me-2"></i> +1 234 567 890</p>
+                        <p><i class="fas fa-envelope me-2"></i> info@mitienda.com</p>
+                    </address>
+                </div>
+            </div>
+            <hr class="mt-4 bg-light">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p class="mb-0">© 2023 Mi Tienda. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

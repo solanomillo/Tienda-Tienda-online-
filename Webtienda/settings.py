@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-lm*h8n6-zi(lao5l4dqh3bsp=d9q(gc9b%)i8uw*nzmp+5+uln'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [config('ALLOWED_HOSTS', default='')]
 
 
 # Application definition
@@ -115,11 +116,11 @@ WSGI_APPLICATION = 'Webtienda.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'tiendaweb',
-        'USER': 'julio',
-        'PASSWORD': 'riverplate',
-        'HOST': 'localhost',  # Cambia si usas un servidor remoto
-        'PORT': '3306',       # Puerto por defecto para MySQL        
+        'NAME': config('DATABASE_NAME'),
+        'USER': config('DATABASE_USER'),
+        'PASSWORD': config('DATABASE_PASSWORD'),
+        'HOST': config('DATABASE_HOST'),  # Cambia si usas un servidor remoto
+        'PORT': config('DATABASE_PORT'),       # Puerto por defecto para MySQL
     }
 }
 
@@ -147,7 +148,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'es'
+LANGUAGE_CODE = 'es-arg'
 
 TIME_ZONE = 'UTC'
 
